@@ -23,9 +23,6 @@ var FloatingLabel = require('react-native-floating-labels');
 var {
   AppRegistry,
   StyleSheet,
-  TextInput,
-  LayoutAnimation,
-  Text,
   View,
 } = React;
 
@@ -59,6 +56,7 @@ var styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('form', () => form);
+
 
 ```
 
