@@ -1,0 +1,92 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/iojs', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@2.7.6
+3 info using node@v1.7.1
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec { raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/mayank/Projects/github/react-native-floating-labels',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/mayank/.npm/react-native-floating-labels/0.1.0/package.tgz not in flight; packing
+9 verbose tar pack [ '/Users/mayank/.npm/react-native-floating-labels/0.1.0/package.tgz',
+9 verbose tar pack   '/Users/mayank/Projects/github/react-native-floating-labels' ]
+10 verbose tarball /Users/mayank/.npm/react-native-floating-labels/0.1.0/package.tgz
+11 verbose folder /Users/mayank/Projects/github/react-native-floating-labels
+12 info prepublish react-native-floating-labels@0.1.0
+13 verbose addLocalTarball adding from inside cache /Users/mayank/.npm/react-native-floating-labels/0.1.0/package.tgz
+14 silly cache afterAdd react-native-floating-labels@0.1.0
+15 verbose afterAdd /Users/mayank/.npm/react-native-floating-labels/0.1.0/package/package.json not in flight; writing
+16 verbose afterAdd /Users/mayank/.npm/react-native-floating-labels/0.1.0/package/package.json written
+17 silly publish { name: 'react-native-floating-labels',
+17 silly publish   version: '0.1.0',
+17 silly publish   description: 'Reusabe floating lable component for react native',
+17 silly publish   main: 'index.js',
+17 silly publish   repository:
+17 silly publish    { type: 'git',
+17 silly publish      url: 'https://github.com/mayank-patel/react-native-floating-labels.git' },
+17 silly publish   keywords: [ 'react-component', 'react-native', 'ios', 'floating-labels' ],
+17 silly publish   dependencies: { 'react-native': '^0.4.1' },
+17 silly publish   author: { name: 'Mayank Patel' },
+17 silly publish   license: 'MIT',
+17 silly publish   readme: '## react-native-floating-labels\n\nA `<FloatingLabel>` component for react-native. This is still very much a work\nin progress and only handles the simplest of cases, ideas and\ncontributions are very welcome.\n\n![Demo](https://raw.githubusercontent.com/mayank-patel/react-native-floating-labels/master/demo.gif)\n\n## Add it to your project\n\n\n1. Run `npm install react-native-floating-labels --save`\n2. `var FloatingLabel = require(\'react-native-floating-labels\');`\n\n## Usage\n\n```javascript\n\'use strict\';\n\nvar React = require(\'react-native\');\nvar FloatingLabel = require(\'react-native-floating-labels\');\n\nvar {\n  AppRegistry,\n  StyleSheet,\n  View,\n} = React;\n\nclass form extends React.Component{\n\n  constructor(props, context) {\n    super(props, context);\n\n    this.state = {\n      dirty: false,\n    };\n  }\n\n  render() {\n    return (\n      <View style={styles.container}>\n        <FloatingLabel>Email</FloatingLabel>\n        <FloatingLabel>First Name</FloatingLabel>\n        <FloatingLabel>Last Name</FloatingLabel>\n      </View>\n    );\n  }\n};\n\nvar styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: \'center\',\n    backgroundColor: \'#673AB7\',\n  },\n});\n\nAppRegistry.registerComponent(\'form\', () => form);\n\n\n```\n\n**MIT Licensed**',
+17 silly publish   readmeFilename: 'README.md',
+17 silly publish   gitHead: 'fe497fc4fd86c4147a5b67b92d5be3358005ab4e',
+17 silly publish   bugs: { url: 'https://github.com/mayank-patel/react-native-floating-labels/issues' },
+17 silly publish   homepage: 'https://github.com/mayank-patel/react-native-floating-labels',
+17 silly publish   _id: 'react-native-floating-labels@0.1.0',
+17 silly publish   scripts: {},
+17 silly publish   _shasum: 'b9f0b0f40163673aefceb05ce881b1fd93900de2',
+17 silly publish   _from: '.' }
+18 silly mapToRegistry name react-native-floating-labels
+19 silly mapToRegistry using default registry
+20 silly mapToRegistry registry https://registry.npmjs.org/
+21 silly mapToRegistry uri https://registry.npmjs.org/react-native-floating-labels
+22 verbose publish registryBase https://registry.npmjs.org/
+23 silly publish uploading /Users/mayank/.npm/react-native-floating-labels/0.1.0/package.tgz
+24 verbose request uri https://registry.npmjs.org/react-native-floating-labels
+25 verbose request sending authorization for write operation
+26 info attempt registry request try #1 at 19:24:17
+27 verbose request using bearer token for auth
+28 verbose request id 682f7d9ee717de6d
+29 http request PUT https://registry.npmjs.org/react-native-floating-labels
+30 http 403 https://registry.npmjs.org/react-native-floating-labels
+31 verbose headers { 'content-type': 'application/json',
+31 verbose headers   'cache-control': 'max-age=60',
+31 verbose headers   'content-length': '95',
+31 verbose headers   'accept-ranges': 'bytes',
+31 verbose headers   date: 'Tue, 05 May 2015 23:24:18 GMT',
+31 verbose headers   via: '1.1 varnish',
+31 verbose headers   connection: 'keep-alive',
+31 verbose headers   'x-served-by': 'cache-jfk1035-JFK',
+31 verbose headers   'x-cache': 'MISS',
+31 verbose headers   'x-cache-hits': '0',
+31 verbose headers   'x-timer': 'S1430868257.132498,VS0,VE1493' }
+32 verbose request invalidating /Users/mayank/.npm/registry.npmjs.org/react-native-floating-labels on PUT
+33 error publish Failed PUT 403
+34 verbose stack Error: "You cannot publish over the previously published version 0.1.0." : react-native-floating-labels
+34 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:247:14)
+34 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:170:14)
+34 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:360:22)
+34 verbose stack     at emitTwo (events.js:87:13)
+34 verbose stack     at Request.emit (events.js:169:7)
+34 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1202:14)
+34 verbose stack     at emitOne (events.js:82:20)
+34 verbose stack     at Request.emit (events.js:166:7)
+34 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1150:12)
+34 verbose stack     at emitNone (events.js:72:20)
+35 verbose statusCode 403
+36 verbose pkgid react-native-floating-labels
+37 verbose cwd /Users/mayank/Projects/github/react-native-floating-labels
+38 error Darwin 14.3.0
+39 error argv "/usr/local/bin/iojs" "/usr/local/bin/npm" "publish"
+40 error node v1.7.1
+41 error npm  v2.7.6
+42 error code E403
+43 error "You cannot publish over the previously published version 0.1.0." : react-native-floating-labels
+44 error If you need help, you may report this error at:
+44 error     <https://github.com/npm/npm/issues>
+45 verbose exit [ 1, true ]
