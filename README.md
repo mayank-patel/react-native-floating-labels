@@ -18,6 +18,7 @@ contributions are very welcome.
 'use strict';
 
 var React = require('react-native');
+
 var FloatingLabel = require('react-native-floating-labels');
 
 var {
@@ -26,7 +27,7 @@ var {
   View,
 } = React;
 
-class form extends React.Component{
+class form extends React.Component {
 
   constructor(props, context) {
     super(props, context);
@@ -36,12 +37,31 @@ class form extends React.Component{
     };
   }
 
+  onBlur() {
+    console.log('#####: onBlur');
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <FloatingLabel>Email</FloatingLabel>
-        <FloatingLabel>First Name</FloatingLabel>
-        <FloatingLabel>Last Name</FloatingLabel>
+        <FloatingLabel 
+            labelStyle={styles.labelInput}
+            inputStyle={styles.input}
+            style={styles.formInput}
+            value='john@email.com'
+            onBlur={this.onBlur}
+          >Email</FloatingLabel>
+        <FloatingLabel 
+            labelStyle={styles.labelInput}
+            inputStyle={styles.input}
+
+            style={styles.formInput}
+          >First Name</FloatingLabel>
+        <FloatingLabel
+            labelStyle={styles.labelInput}
+            inputStyle={styles.input}
+            style={styles.formInput}
+          >Last Name</FloatingLabel>
       </View>
     );
   }
@@ -50,14 +70,67 @@ class form extends React.Component{
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#673AB7',
+    paddingTop: 65,
+    backgroundColor: 'white',
   },
+  labelInput: {
+    color: '#673AB7',
+  },
+  formInput: {    
+    borderBottomWidth: 1.5, 
+    marginLeft: 20,
+    borderColor: '#333',       
+  },
+  input: {
+    borderWidth: 0
+  }
 });
 
 AppRegistry.registerComponent('form', () => form);
 
 
+
+
 ```
+
+Additional Props: 
+
+FloatingLabel is just like any TextInput. It supports the below mentioned events handlers:
+
+```
+Following properties of TextInput are supported:
+
+- autoCapitalize
+- autoCorrect
+- autoFocus
+- bufferDelay
+- clearButtonMode
+- clearTextOnFocus
+- controlled
+- editable
+- enablesReturnKeyAutomatically
+- keyboardType
+- multiline
+- password
+- returnKeyType
+- selectTextOnFocus
+- selectionState
+- style
+- testID
+- value
+
+Following events are supported:
+
+- onBlur
+- onChange
+- onChangeText
+- onEndEditing
+- onFocus
+- onSubmitEditing
+
+```
+
+
+
 
 **MIT Licensed**

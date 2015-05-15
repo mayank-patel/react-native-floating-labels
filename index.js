@@ -2,6 +2,7 @@
 var React = require('react-native');
 
 var {
+  PropTypes,
   StyleSheet,
   TextInput,
   LayoutAnimation,
@@ -9,79 +10,131 @@ var {
   View,
 } = React;
 
-class FloatingLabel extends React.Component {
+var FloatingLabel  = React.createClass({
 
-  constructor(props, context) {
-    super(props, context);
+  propTypes: {
+    ...TextInput.propTypes,
+    inputStyle: TextInput.propTypes.style,
+    labelStyle: Text.propTypes.style,
+    disabled: PropTypes.bool,
+    style: View.propTypes.style,
+  },
+  
 
-    this.state = {
+  getInitialState () {
+    return {
       text: '',
-      dirty: false,
+      dirty: !!this.props.value,
     };
-  }
+  },
 
-  onFocus () {
+  _onFocus () {
     setTimeout(function () {
       LayoutAnimation.configureNext(animations.layout.easeInEaseOut);
       this.setState({dirty: true});
 
       if (this.props.onFocus) {
-      	this.props.onFocus();
+      	this.props.onFocus(arguments);
       }
     }.bind(this), 0);
-  }
+  },
 
-  onBlur () {
+  _onBlur () {
     setTimeout(function () {
-      console.log("#### Blur: " + this.state.text);
-
       if (this.state.text === '') {
 	      LayoutAnimation.configureNext(animations.layout.easeInEaseOut);
 	      this.setState({dirty: false});
       }
 
       if (this.props.onBlur) {
-		this.props.onBlur();
+		    this.props.onBlur(arguments);
       }
     }.bind(this), 0);
-  }
+  },
 
-  updateText(text) {
-  	
+  updateText(event) {
+  	var text = event.nativeEvent.text;
+
   	this.setState({
   		text: text
   	});
 
-  	console.log("#### Change: " + this.state.text);
-  }
+    if (this.props.onEndEditing) {
+      this.props.onEndEditing(arguments);
+    }
+  },
 
-  render() {
-    var dirty = this.state.dirty;
+  _renderLabel () {
+    var labelStyles = [];
 
-    var label = (
-      <Text ref='label' style={label = dirty ? styles.labelDirty : styles.labelClean}>
-		{this.props.children}
-      </Text>);
+    labelStyles.push(this.state.dirty ? styles.labelDirty : styles.labelClean);
 
+    if (this.props.labelStyle) {
+      labelStyles.push(this.props.labelStyle);
+    }
 
     return (
-  		<View style={{position: 'relative'}}>
-        {label}
+        <Text 
+          ref='label' 
+          style={labelStyles}
+        >
+          {this.props.children}
+        </Text>)
+  },
+
+  render() {
+    var props = {
+        autoCapitalize: this.props.autoCapitalize,
+        autoCorrect: this.props.autoCorrect,
+        autoFocus: this.props.autoFocus,
+        bufferDelay: this.props.bufferDelay,
+        clearButtonMode: this.props.clearButtonMode,
+        clearTextOnFocus: this.props.clearTextOnFocus,
+        controlled: this.props.controlled,
+        editable: this.props.editable,
+        enablesReturnKeyAutomatically: this.props.enablesReturnKeyAutomatically,
+        keyboardType: this.props.keyboardType,
+        multiline: this.props.multiline,
+        onBlur: this._onBlur,
+        onChange: this.props.onChange,
+        onChangeText: this.props.onChangeText,
+        onEndEditing: this.updateText,
+        onFocus: this._onFocus,
+        onSubmitEditing: this.props.onSubmitEditing,
+        password: this.props.password,
+        returnKeyType: this.props.returnKeyType,
+        selectTextOnFocus: this.props.selectTextOnFocus,
+        selectionState: this.props.selectionState,
+        style: [styles.input],
+        testID: this.props.testID,
+        value: this.props.value,
+      },
+      elementStyles = [styles.element];
+
+    if (this.props.inputStyle) {
+      props.style.push(this.props.inputStyle);
+    }
+
+    if (this.props.style) {
+      elementStyles.push(this.props.style);
+    }
+
+    return (
+  		<View style={elementStyles}>
+        {this._renderLabel()}
         <TextInput
-          onFocus={this.onFocus.bind(this)}
-          onBlur={this.onBlur.bind(this)}
-          onEndEditing={(event) => this.updateText(event.nativeEvent.text)}
-          placeholderTextColor="#FF0000"
-          returnKeyType="next"
-          style={styles.input}
+          {...props}
         >
         </TextInput>
       </View>
     );
-  }
-};
+  },
+});
 
 var styles = StyleSheet.create({
+  element: {
+    position: 'relative'
+  },
   input: {
     height: 40, 
     borderColor: 'gray', 
@@ -92,11 +145,11 @@ var styles = StyleSheet.create({
     fontSize: 20,
     borderRadius: 4,
     paddingLeft: 10,
-    margin: 20,
-    marginBottom: 0,
+    marginTop: 20,
+    
   },
   labelClean: {    
-    margin: 21,
+    marginTop: 21,    
     paddingLeft: 9,
     color: '#AAA',
     position: 'absolute',
@@ -104,7 +157,7 @@ var styles = StyleSheet.create({
     top: 7
   },
   labelDirty: {    
-    margin: 21,    
+    marginTop: 21,   
     paddingLeft: 9,
     color: '#AAA',
     position: 'absolute',
@@ -112,6 +165,11 @@ var styles = StyleSheet.create({
     top: -17,
   }
 });
+
+FloatingLabel.propTypes = {
+  disabled: PropTypes.bool,
+  style: Text.propTypes.style,
+};
 
 var animations = {
   layout: {    
