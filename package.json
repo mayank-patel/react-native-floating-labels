@@ -17,7 +17,7 @@
     "lodash": "^3.8.0"
   },
   "peerDependencies": {
-    "react-native": "^0.4.1"
+    "react-native": ">=0.4.1 <1.0"
   },
   "author": "Mayank Patel",
   "license": "MIT"
