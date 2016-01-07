@@ -19,7 +19,7 @@ var FloatingLabel  = React.createClass({
     disabled: PropTypes.bool,
     style: View.propTypes.style,
   },
-  
+
 
   getInitialState () {
     return {
@@ -74,8 +74,8 @@ var FloatingLabel  = React.createClass({
     }
 
     return (
-        <Text 
-          ref='label' 
+        <Text
+          ref='label'
           style={labelStyles}
         >
           {this.props.children}
@@ -136,28 +136,28 @@ var styles = StyleSheet.create({
     position: 'relative'
   },
   input: {
-    height: 40, 
-    borderColor: 'gray', 
+    height: 40,
+    borderColor: 'gray',
     backgroundColor: 'transparent',
     justifyContent: 'center',
-    borderWidth: 1, 
+    borderWidth: 1,
     color: 'black',
-    fontSize: 20,
+    fontSize: 18,
     borderRadius: 4,
     paddingLeft: 10,
     marginTop: 20,
-    
+
   },
-  labelClean: {    
-    marginTop: 21,    
+  labelClean: {
+    marginTop: 21,
     paddingLeft: 9,
     color: '#AAA',
     position: 'absolute',
-    fontSize: 20,
+    fontSize: 16,
     top: 7
   },
-  labelDirty: {    
-    marginTop: 21,   
+  labelDirty: {
+    marginTop: 21,
     paddingLeft: 9,
     color: '#AAA',
     position: 'absolute',
@@ -172,7 +172,7 @@ FloatingLabel.propTypes = {
 };
 
 var animations = {
-  layout: {    
+  layout: {
     easeInEaseOut: {
       duration: 200,
       create: {
