@@ -153,7 +153,7 @@ var styles = StyleSheet.create({
     paddingLeft: 9,
     color: '#AAA',
     position: 'absolute',
-    fontSize: 16,
+    fontSize: 18,
     top: 7
   },
   labelDirty: {
