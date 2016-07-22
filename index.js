@@ -150,7 +150,7 @@ var styles = StyleSheet.create({
   },
   labelClean: {
     marginTop: 21,
-    paddingLeft: 9,
+    // paddingLeft: 9,
     color: '#AAA',
     position: 'absolute',
     fontSize: 18,
@@ -158,7 +158,7 @@ var styles = StyleSheet.create({
   },
   labelDirty: {
     marginTop: 21,
-    paddingLeft: 9,
+    // paddingLeft: 9,
     color: '#AAA',
     position: 'absolute',
     fontSize: 12,
