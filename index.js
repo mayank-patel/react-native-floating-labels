@@ -144,7 +144,7 @@ var styles = StyleSheet.create({
     color: 'black',
     fontSize: 18,
     borderRadius: 4,
-    paddingLeft: 10,
+    // paddingLeft: 10,
     marginTop: 20,
 
   },
