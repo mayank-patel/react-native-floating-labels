@@ -1,14 +1,13 @@
 'use strict';
-var React = require('react-native');
-
-var {
-  PropTypes,
+import React, { PropTypes } from 'react';
+import {
   StyleSheet,
   TextInput,
   LayoutAnimation,
   Text,
+  Platform,
   View,
-} = React;
+} from 'react-native';
 
 var FloatingLabel  = React.createClass({
 
@@ -34,7 +33,7 @@ var FloatingLabel  = React.createClass({
       this.setState({dirty: true});
 
       if (this.props.onFocus) {
-      	this.props.onFocus(arguments);
+        this.props.onFocus(arguments);
       }
     }.bind(this), 0);
   },
@@ -42,22 +41,22 @@ var FloatingLabel  = React.createClass({
   _onBlur () {
     setTimeout(function () {
       if (this.state.text === '') {
-	      LayoutAnimation.configureNext(animations.layout.easeInEaseOut);
-	      this.setState({dirty: false});
+        LayoutAnimation.configureNext(animations.layout.easeInEaseOut);
+        this.setState({dirty: false});
       }
 
       if (this.props.onBlur) {
-		    this.props.onBlur(arguments);
+        this.props.onBlur(arguments);
       }
     }.bind(this), 0);
   },
 
   updateText(event) {
-  	var text = event.nativeEvent.text;
+    var text = event.nativeEvent.text;
 
-  	this.setState({
-  		text: text
-  	});
+    this.setState({
+      text: text
+    });
 
     if (this.props.onEndEditing) {
       this.props.onEndEditing(arguments);
@@ -120,7 +119,7 @@ var FloatingLabel  = React.createClass({
     }
 
     return (
-  		<View style={elementStyles}>
+      <View style={elementStyles}>
         {this._renderLabel()}
         <TextInput
           {...props}
@@ -144,6 +143,7 @@ var styles = StyleSheet.create({
     color: 'black',
     fontSize: 18,
     borderRadius: 4,
+    marginLeft: Platform.OS === 'android' ? -5 : 0,
     // paddingLeft: 10,
     marginTop: 20,
 
