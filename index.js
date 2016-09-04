@@ -141,9 +141,8 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     borderWidth: 1,
     color: 'black',
-    fontSize: 18,
+    fontSize: 17,
     borderRadius: 4,
-    marginLeft: Platform.OS === 'android' ? -5 : 0,
     // paddingLeft: 10,
     marginTop: 20,
 
@@ -153,7 +152,7 @@ var styles = StyleSheet.create({
     // paddingLeft: 9,
     color: '#AAA',
     position: 'absolute',
-    fontSize: 18,
+    fontSize: 17,
     top: 7
   },
   labelDirty: {
@@ -165,6 +164,43 @@ var styles = StyleSheet.create({
     top: -17,
   }
 });
+
+
+// var styles = StyleSheet.create({
+//   element: {
+//     position: 'relative'
+//   },
+//   input: {
+//     height: 40,
+//     borderColor: 'gray',
+//     backgroundColor: 'transparent',
+//     justifyContent: 'center',
+//     borderWidth: 1,
+//     color: 'black',
+//     fontSize: 18,
+//     borderRadius: 4,
+//     marginLeft: Platform.OS === 'android' ? -5 : 0,
+//     // paddingLeft: 10,
+//     marginTop: 20,
+
+//   },
+//   labelClean: {
+//     marginTop: 21,
+//     // paddingLeft: 9,
+//     color: '#AAA',
+//     position: 'absolute',
+//     fontSize: 18,
+//     top: 7
+//   },
+//   labelDirty: {
+//     marginTop: 21,
+//     // paddingLeft: 9,
+//     color: '#AAA',
+//     position: 'absolute',
+//     fontSize: 12,
+//     top: -17,
+//   }
+// });
 
 FloatingLabel.propTypes = {
   disabled: PropTypes.bool,
