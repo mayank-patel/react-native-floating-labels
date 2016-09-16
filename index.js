@@ -135,7 +135,7 @@ var styles = StyleSheet.create({
     position: 'relative'
   },
   input: {
-    height: 40,
+    height: 45,
     borderColor: 'gray',
     backgroundColor: 'transparent',
     justifyContent: 'center',
