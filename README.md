@@ -1,4 +1,4 @@
-## react-native-floating-labels
+## react-native-floating-labels [![Build Status](https://travis-ci.org/mayank-patel/react-native-floating-labels.svg?branch=master)](https://travis-ci.org/mayank-patel/react-native-floating-labels)
 
 A `<FloatingLabel>` component for react-native. This is still very much a work
 in progress and only handles the simplest of cases, ideas and
