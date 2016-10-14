@@ -1,5 +1,7 @@
 deploy:
   language: node_js
+  node_js: 
+    - "node"
   provider: npm
   email: patel.mayank@outlook.com
   api_key:
