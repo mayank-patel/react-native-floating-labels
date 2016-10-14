@@ -1,0 +1,8 @@
+deploy:
+  provider: npm
+  email: patel.mayank@outlook.com
+  api_key:
+    secure: YAYQqaTuQW+mVlhLk+yzPj3hqS+o8BOCwMejOHlqkOyRlW5XjUvkNbYgrIJhiED7U8HVpxLoo4t1LsInzqp3nA0A3cxgWQsANCbACZHtPeEcCocS5p7DiZMVO1qNZcNHKufXZ+PMydfcmMAsm6/hlc4u+YYK1i2y22e8cBBLjjjHpzaE4meY7KKlMxCdBnpqB1I+duWPiR2ylju/4oAhYeG80GtpwpgpGe6Tq+qBi0vgAqzepverSvFA96WEm/rtGIIZfS2VyRiLbiyRSjG74/46zkpcSaLQtWJtZBiQLLBWSrZATWfxISaMpKxWN2DGhGwbaowAIousy6Z0pXa4uqI76aPdIPPOL3HKS+XVZrVmiCpM3wAwxNxhyDkmhSB1bLMf1bAFgGzm4i9lMYttZGb+dXoHCN4RI1pVRWpQJb6NBRsh1h2jzpbBSATMSWpQ7/fq/a7x6cW/pET+Cgo74EYwPxix/m7uDAoG3r8p3A0Nreguc0pvW2kHcodLd+BPItgnDWM8eUucYaCarGplXBb21VAfTnyZ1YVe/WEKoMXaRav0jj/ZMfdS2AC156JNr6pJGNRkWf6HxnKoAHBci/qIV5cOMWyGIeEW3utu9egQAmcLaDAEtLqZs0b/xjas1dcRMKtUNo6/WVbSoIajyRbRqO8N0zz3XYeGYIyJQF8=
+  on:
+    repo: mayank-patel/react-native-floating-labels
+    branch: production
