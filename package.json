@@ -1,6 +1,6 @@
 {
   "name": "react-native-floating-labels",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Reusabe floating lable component for react native",
   "main": "index.js",
   "repository": {
