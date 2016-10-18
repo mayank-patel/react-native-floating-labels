@@ -95,6 +95,7 @@ var FloatingLabel  = React.createClass({
   _renderLabel () {
     return (
       <Animated.Text
+        pointerEvents='none'
         ref='label'
         style={[this.state.labelStyle, styles.label, this.props.labelStyle]}
       >
@@ -129,6 +130,7 @@ var FloatingLabel  = React.createClass({
         style: [styles.input],
         testID: this.props.testID,
         value: this.props.value,
+        underlineColorAndroid: this.props.underlineColorAndroid // android TextInput will show the default bottom border
       },
       elementStyles = [styles.element];
 
@@ -157,10 +159,6 @@ var labelStyleObj = {
   paddingLeft: 9,
   color: '#AAA',
   position: 'absolute'
-}
-
-if (Platform.OS === 'web') {
-  labelStyleObj.pointerEvents = 'none'
 }
 
 var styles = StyleSheet.create({
