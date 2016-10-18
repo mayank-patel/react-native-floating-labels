@@ -175,9 +175,10 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     borderWidth: 1,
     color: 'black',
-    fontSize: 20,
+    fontSize: 18,
     borderRadius: 4,
-    paddingLeft: 10,
+    marginLeft: Platform.OS === 'android' ? -5 : 0,
+    // paddingLeft: 10,
     marginTop: 20,
   },
   label: labelStyleObj
@@ -192,6 +193,7 @@ var dirtyStyle = {
   fontSize: 12,
   top: -17,
 }
+
 
 FloatingLabel.propTypes = {
   disabled: PropTypes.bool,

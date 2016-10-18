@@ -17,7 +17,7 @@
     "lodash": "^3.8.0"
   },
   "scripts": {
-    "test": "echo 'Success'"  
+    "test": "echo 'Success'"
   },
   "author": "Mayank Patel",
   "license": "MIT"
