@@ -142,7 +142,7 @@ var FloatingLabel  = React.createClass({
     }
 
     return (
-  		<View style={elementStyles} pointerEvents='none'>
+  		<View style={elementStyles}>
         {this._renderLabel()}
         <TextInput
           {...props}
