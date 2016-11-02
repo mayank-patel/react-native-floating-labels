@@ -95,7 +95,6 @@ var FloatingLabel  = React.createClass({
   _renderLabel () {
     return (
       <Animated.Text
-        pointerEvents='none'
         ref='label'
         style={[this.state.labelStyle, styles.label, this.props.labelStyle]}
       >
@@ -161,18 +160,22 @@ var labelStyleObj = {
   position: 'absolute'
 }
 
+if (Platform.OS === 'web') {
+  labelStyleObj.pointerEvents = 'none'
+}
+
 var styles = StyleSheet.create({
   element: {
     position: 'relative'
   },
   input: {
-    height: 45,
+    height: 40,
     borderColor: 'gray',
     backgroundColor: 'transparent',
     justifyContent: 'center',
     borderWidth: 1,
     color: 'black',
-    fontSize: 18,
+    fontSize: 20,
     borderRadius: 4,
     paddingLeft: 10,
     marginTop: 20,
@@ -181,7 +184,7 @@ var styles = StyleSheet.create({
 })
 
 var cleanStyle = {
-  fontSize: 18,
+  fontSize: 20,
   top: 7
 }
 
