@@ -1,6 +1,6 @@
 {
   "name": "react-native-floating-labels",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Reusabe floating lable component for react native",
   "main": "index.js",
   "repository": {
@@ -11,7 +11,8 @@
     "react-component",
     "react-native",
     "floating-labels",
-    "ios"
+    "ios",
+    "android"
   ],
   "dependencies": {
     "lodash": "^3.8.0"
