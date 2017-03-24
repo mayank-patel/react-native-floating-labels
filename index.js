@@ -122,7 +122,8 @@ var FloatingLabel  = React.createClass({
         onEndEditing: this.updateText,
         onFocus: this._onFocus,
         onSubmitEditing: this.props.onSubmitEditing,
-        password: this.props.password,
+        password: this.props.secureTextEntry || this.props.password, // Compatibility
+        secureTextEntry: this.props.secureTextEntry || this.props.password, // Compatibility
         returnKeyType: this.props.returnKeyType,
         selectTextOnFocus: this.props.selectTextOnFocus,
         selectionState: this.props.selectionState,
