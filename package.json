@@ -1,11 +1,11 @@
 {
-  "name": "react-native-floating-labels",
+  "name": "@krazylabs/react-native-floating-labels",
   "version": "1.1.4",
   "description": "Reusabe floating lable component for react native",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mayank-patel/react-native-floating-labels.git"
+    "url": "https://github.com/KrazyLabs/react-native-floating-labels"
   },
   "keywords": [
     "react-component",
