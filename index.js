@@ -28,7 +28,7 @@ var FloatingLabel  = React.createClass({
   getInitialState () {
     var state = {
       text: this.props.value,
-      dirty: !!this.props.value
+      dirty: (this.props.value || this.props.placeholder)
     };
 
     var style = state.dirty ? dirtyStyle : cleanStyle
@@ -131,6 +131,7 @@ var FloatingLabel  = React.createClass({
         onFocus: this._onFocus,
         onSubmitEditing: this.props.onSubmitEditing,
         password: this.props.secureTextEntry || this.props.password, // Compatibility
+        placeholder: this.props.placeholder,
         secureTextEntry: this.props.secureTextEntry || this.props.password, // Compatibility
         returnKeyType: this.props.returnKeyType,
         selectTextOnFocus: this.props.selectTextOnFocus,
