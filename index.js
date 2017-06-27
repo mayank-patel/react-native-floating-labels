@@ -39,7 +39,7 @@ var FloatingLabel  = React.createClass({
 
     return state
   },
-  
+
   componentWillReceiveProps (props) {
     if (props.value !== this.state.text) {
       this.setState({ text: props.value, dirty: !!props.value })
@@ -103,6 +103,7 @@ var FloatingLabel  = React.createClass({
     return (
       <Animated.Text
         ref='label'
+        numberOfLines={this.props.numberOfLines}
         style={[this.state.labelStyle, styles.label, this.props.labelStyle]}
       >
         {this.props.children}
