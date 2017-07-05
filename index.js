@@ -155,6 +155,7 @@ var FloatingLabel  = React.createClass({
   		<View style={elementStyles}>
         {this._renderLabel()}
         <TextInput
+          ref={(r) => { this.input = r; }}
           {...props}
         >
         </TextInput>
