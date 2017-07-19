@@ -28,7 +28,7 @@ var FloatingLabel  = React.createClass({
   getInitialState () {
     var state = {
       text: this.props.value,
-      dirty: !!this.props.value
+      dirty: (this.props.value || this.props.placeholder)
     };
 
     var style = state.dirty ? dirtyStyle : cleanStyle
@@ -123,6 +123,7 @@ var FloatingLabel  = React.createClass({
         enablesReturnKeyAutomatically: this.props.enablesReturnKeyAutomatically,
         keyboardType: this.props.keyboardType,
         multiline: this.props.multiline,
+        numberOfLines: this.props.numberOfLines,
         onBlur: this._onBlur,
         onChange: this.props.onChange,
         onChangeText: this.onChangeText,
@@ -130,13 +131,14 @@ var FloatingLabel  = React.createClass({
         onFocus: this._onFocus,
         onSubmitEditing: this.props.onSubmitEditing,
         password: this.props.secureTextEntry || this.props.password, // Compatibility
+        placeholder: this.props.placeholder,
         secureTextEntry: this.props.secureTextEntry || this.props.password, // Compatibility
         returnKeyType: this.props.returnKeyType,
         selectTextOnFocus: this.props.selectTextOnFocus,
         selectionState: this.props.selectionState,
         style: [styles.input],
         testID: this.props.testID,
-        value: this.props.value,
+        value: this.state.text,
         underlineColorAndroid: this.props.underlineColorAndroid, // android TextInput will show the default bottom border
         onKeyPress: this.props.onKeyPress
       },
