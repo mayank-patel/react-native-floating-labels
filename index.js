@@ -39,7 +39,7 @@ var FloatingLabel  = React.createClass({
 
     return state
   },
-  
+
   componentWillReceiveProps (props) {
     if (typeof props.value !== 'undefined' && props.value !== this.state.text) {
       this.setState({ text: props.value, dirty: !!props.value })
@@ -201,10 +201,5 @@ var dirtyStyle = {
   fontSize: 12,
   top: -17,
 }
-
-FloatingLabel.propTypes = {
-  disabled: PropTypes.bool,
-  style: Text.propTypes.style,
-};
 
 module.exports = FloatingLabel;
