@@ -1,5 +1,5 @@
 {
-  "name": "@krazylabs/react-native-floating-labels",
+  "name": "react-native-floating-labels",
   "version": "1.1.5",
   "description": "Reusabe floating lable component for react native",
   "main": "index.js",
