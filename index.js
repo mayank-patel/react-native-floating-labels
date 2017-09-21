@@ -103,6 +103,7 @@ var FloatingLabel  = React.createClass({
     return (
       <Animated.Text
         ref='label'
+        numberOfLines={this.props.numberOfLines}
         style={[this.state.labelStyle, styles.label, this.props.labelStyle]}
       >
         {this.props.children}
@@ -156,6 +157,7 @@ var FloatingLabel  = React.createClass({
   		<View style={elementStyles}>
         {this._renderLabel()}
         <TextInput
+          ref={(r) => { this.input = r; }}
           {...props}
         >
         </TextInput>
