@@ -25,7 +25,17 @@ var propTypes = {
   style: ViewPropTypes.style,
 }
 
-var FloatingLabel  = createReactClass({
+const cleanStyle = {
+  fontSize: 20,
+  top: 7
+};
+
+const dirtyStyle = {
+  fontSize: 12,
+  top: -17
+};
+
+var FloatingLabel  = React.createClass({
   propTypes: propTypes,
 
   getInitialState () {
@@ -34,7 +44,10 @@ var FloatingLabel  = createReactClass({
       dirty: (this.props.value || this.props.placeholder)
     };
 
-    var style = state.dirty ? dirtyStyle : cleanStyle
+    this.cleanStyle = this.props.cleanStyle ? this.props.cleanStyle : cleanStyle;
+    this.dirtyStyle = this.props.dirtyStyle ? this.props.dirtyStyle : dirtyStyle;
+
+    var style = state.dirty ? this.dirtyStyle : this.cleanStyle
     state.labelStyle = {
       fontSize: new Animated.Value(style.fontSize),
       top: new Animated.Value(style.top)
@@ -51,7 +64,7 @@ var FloatingLabel  = createReactClass({
   },
 
   _animate(dirty) {
-    var nextStyle = dirty ? dirtyStyle : cleanStyle
+    var nextStyle = dirty ? this.dirtyStyle : this.cleanStyle
     var labelStyle = this.state.labelStyle
     var anims = Object.keys(nextStyle).map(prop => {
       return Animated.timing(
@@ -199,14 +212,9 @@ var styles = StyleSheet.create({
   label: labelStyleObj
 })
 
-var cleanStyle = {
-  fontSize: 20,
-  top: 7
-}
-
-var dirtyStyle = {
-  fontSize: 12,
-  top: -17,
-}
+FloatingLabel.propTypes = {
+  disabled: PropTypes.bool,
+  style: Text.propTypes.style,
+};
 
 module.exports = FloatingLabel;
