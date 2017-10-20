@@ -1,6 +1,6 @@
 {
   "name": "rn-floating-label-input",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Reusabe floating lable component for react native",
   "main": "index.js",
   "repository": {
