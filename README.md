@@ -1,6 +1,6 @@
-## react-native-floating-labels [![Build Status](https://travis-ci.org/mayank-patel/react-native-floating-labels.svg?branch=master)](https://travis-ci.org/mayank-patel/react-native-floating-labels) [![npm version](https://badge.fury.io/js/react-native-floating-labels.svg)](https://badge.fury.io/js/react-native-floating-labels) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE) [![Code Climate](https://codeclimate.com/github/mayank-patel/react-native-floating-labels/badges/gpa.svg)](https://codeclimate.com/github/mayank-patel/react-native-floating-labels)
+## rn-floating-label-input [![Build Status](https://travis-ci.org/mayank-patel/react-native-floating-labels.svg?branch=master)](https://travis-ci.org/mayank-patel/react-native-floating-labels) [![npm version](https://badge.fury.io/js/react-native-floating-labels.svg)](https://badge.fury.io/js/react-native-floating-labels) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE) [![Code Climate](https://codeclimate.com/github/mayank-patel/react-native-floating-labels/badges/gpa.svg)](https://codeclimate.com/github/mayank-patel/react-native-floating-labels)
  
-A `<FloatingLabel>` component for react-native. This is still very much a work
+A `<FloatingLabelInput>` component for react-native. This is still very much a work
 in progress and only handles the simplest of cases, ideas and
 contributions are very welcome.
 
@@ -9,8 +9,8 @@ contributions are very welcome.
 ## Add it to your project
 
 
-1. Run `npm install react-native-floating-labels --save`
-2. `var FloatingLabel = require('react-native-floating-labels');`
+1. Run `npm install rn-floating-label-input --save`
+2. `import FloatingLabelInput from 'rn-floating-label-input';`
 
 ## Usage
 
@@ -19,13 +19,9 @@ contributions are very welcome.
 
 var React = require('react-native');
 
-var FloatingLabel = require('react-native-floating-labels');
+import FloatingLabelInput from 'rn-floating-label-input';
 
-var {
-  AppRegistry,
-  StyleSheet,
-  View,
-} = React;
+import { AppRegistry, StyleSheet, View, } from 'react-native';
 
 class form extends React.Component {
 
@@ -44,24 +40,29 @@ class form extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <FloatingLabel 
-            labelStyle={styles.labelInput}
-            inputStyle={styles.input}
-            style={styles.formInput}
-            value='john@email.com'
-            onBlur={this.onBlur}
-          >Email</FloatingLabel>
-        <FloatingLabel 
-            labelStyle={styles.labelInput}
-            inputStyle={styles.input}
-
-            style={styles.formInput}
-          >First Name</FloatingLabel>
-        <FloatingLabel
-            labelStyle={styles.labelInput}
-            inputStyle={styles.input}
-            style={styles.formInput}
-          >Last Name</FloatingLabel>
+        <FloatingLabelInput 
+          labelStyle={styles.labelInput}
+          inputStyle={styles.input}
+          style={styles.formInput}
+          value='john@email.com'
+          onBlur={this.onBlur}
+        >
+          Email
+        </FloatingLabelInput>
+        <FloatingLabelInput 
+          labelStyle={styles.labelInput}
+          inputStyle={styles.input}
+          style={styles.formInput}
+        >
+          First Name
+        </FloatingLabelInput>
+        <FloatingLabelInput
+          labelStyle={styles.labelInput}
+          inputStyle={styles.input}
+          style={styles.formInput}
+        >
+          Last Name
+        </FloatingLabelInput>
       </View>
     );
   }
@@ -87,15 +88,11 @@ var styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('form', () => form);
-
-
-
-
 ```
 
 Additional Props: 
 
-FloatingLabel is just like any TextInput. It supports the below mentioned events handlers:
+FloatingLabelInput is just like any TextInput. It supports the below mentioned events handlers:
 
 ```
 Following properties of TextInput are supported:
@@ -129,8 +126,5 @@ Following events are supported:
 - onSubmitEditing
 
 ```
-
-
-
 
 **MIT Licensed**
