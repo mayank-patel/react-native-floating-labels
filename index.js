@@ -15,19 +15,20 @@ import {
 
 class FloatingLabelInput extends Component {
 
-  getInitialState () {
-    const state = {
+  constructor(props) {
+    super(props);
+
+    const isDirty = (this.props.value || this.props.placeholder);
+    const style = isDirty ? dirtyStyle : cleanStyle;
+
+    this.state = {
       text: this.props.value,
-      dirty: (this.props.value || this.props.placeholder)
+      dirty: isDirty,
+      labelStyle = {
+        fontSize: new Animated.Value(style.fontSize),
+        top: new Animated.Value(style.top)
+      }
     };
-
-    const style = state.dirty ? dirtyStyle : cleanStyle
-    state.labelStyle = {
-      fontSize: new Animated.Value(style.fontSize),
-      top: new Animated.Value(style.top)
-    }
-
-    return state
   }
 
   componentWillReceiveProps (props) {
