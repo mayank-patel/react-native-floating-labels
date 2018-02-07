@@ -113,35 +113,13 @@ var FloatingLabel  = React.createClass({
 
   render() {
     var props = {
-        autoCapitalize: this.props.autoCapitalize,
-        autoCorrect: this.props.autoCorrect,
-        autoFocus: this.props.autoFocus,
-        bufferDelay: this.props.bufferDelay,
-        clearButtonMode: this.props.clearButtonMode,
-        clearTextOnFocus: this.props.clearTextOnFocus,
-        controlled: this.props.controlled,
-        editable: this.props.editable,
-        enablesReturnKeyAutomatically: this.props.enablesReturnKeyAutomatically,
-        keyboardType: this.props.keyboardType,
-        multiline: this.props.multiline,
-        numberOfLines: this.props.numberOfLines,
+        ...this.props,
         onBlur: this._onBlur,
-        onChange: this.props.onChange,
         onChangeText: this.onChangeText,
         onEndEditing: this.updateText,
         onFocus: this._onFocus,
-        onSubmitEditing: this.props.onSubmitEditing,
-        password: this.props.secureTextEntry || this.props.password, // Compatibility
-        placeholder: this.props.placeholder,
-        secureTextEntry: this.props.secureTextEntry || this.props.password, // Compatibility
-        returnKeyType: this.props.returnKeyType,
-        selectTextOnFocus: this.props.selectTextOnFocus,
-        selectionState: this.props.selectionState,
         style: [styles.input],
-        testID: this.props.testID,
         value: this.state.text,
-        underlineColorAndroid: this.props.underlineColorAndroid, // android TextInput will show the default bottom border
-        onKeyPress: this.props.onKeyPress
       },
       elementStyles = [styles.element];
 
@@ -156,10 +134,7 @@ var FloatingLabel  = React.createClass({
     return (
   		<View style={elementStyles}>
         {this._renderLabel()}
-        <TextInput
-          ref={(r) => { this.input = r; }}
-          {...props}
-        >
+        <TextInput ref={r => (this.input = r)} {...props}>
         </TextInput>
       </View>
     );
