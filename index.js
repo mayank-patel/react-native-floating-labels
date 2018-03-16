@@ -1,5 +1,7 @@
 'use strict';
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import createReactClass from 'create-react-class';
 
 import {
   StyleSheet,
@@ -22,7 +24,7 @@ var propTypes = {
   style: View.propTypes.style,
 }
 
-var FloatingLabel  = React.createClass({
+var FloatingLabel  = createReactClass({
   propTypes: propTypes,
 
   getInitialState () {
@@ -103,7 +105,6 @@ var FloatingLabel  = React.createClass({
     return (
       <Animated.Text
         ref='label'
-        numberOfLines={this.props.numberOfLines}
         style={[this.state.labelStyle, styles.label, this.props.labelStyle]}
       >
         {this.props.children}
@@ -157,7 +158,6 @@ var FloatingLabel  = React.createClass({
   		<View style={elementStyles}>
         {this._renderLabel()}
         <TextInput
-          ref={(r) => { this.input = r; }}
           {...props}
         >
         </TextInput>
