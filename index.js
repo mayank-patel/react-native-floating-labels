@@ -134,6 +134,7 @@ var FloatingLabel = createReactClass({
         autoCapitalize: this.props.autoCapitalize,
         autoCorrect: this.props.autoCorrect,
         autoFocus: this.props.autoFocus,
+        blurOnSubmit: this.props.blurOnSubmit,
         bufferDelay: this.props.bufferDelay,
         clearButtonMode: this.props.clearButtonMode,
         clearTextOnFocus: this.props.clearTextOnFocus,
