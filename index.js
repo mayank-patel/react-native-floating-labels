@@ -1,9 +1,18 @@
-'use strict';
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import createReactClass from 'create-react-class';
+"use strict";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import createReactClass from "create-react-class";
 
-import { StyleSheet, TextInput, LayoutAnimation, Animated, Easing, Text, View, Platform } from 'react-native';
+import {
+  StyleSheet,
+  TextInput,
+  LayoutAnimation,
+  Animated,
+  Easing,
+  Text,
+  View,
+  Platform
+} from "react-native";
 
 var textPropTypes = Text.propTypes || View.propTypes;
 var textInputPropTypes = TextInput.propTypes || textPropTypes;
@@ -34,8 +43,12 @@ var FloatingLabel = createReactClass({
       dirty: this.props.value || this.props.placeholder
     };
 
-    this.cleanStyle = this.props.cleanStyle ? this.props.cleanStyle : cleanStyle;
-    this.dirtyStyle = this.props.dirtyStyle ? this.props.dirtyStyle : dirtyStyle;
+    this.cleanStyle = this.props.cleanStyle
+      ? this.props.cleanStyle
+      : cleanStyle;
+    this.dirtyStyle = this.props.dirtyStyle
+      ? this.props.dirtyStyle
+      : dirtyStyle;
 
     var style = state.dirty ? this.dirtyStyle : this.cleanStyle;
     state.labelStyle = {
@@ -47,7 +60,7 @@ var FloatingLabel = createReactClass({
   },
 
   componentWillReceiveProps(props) {
-    if (typeof props.value !== 'undefined' && props.value !== this.state.text) {
+    if (typeof props.value !== "undefined" && props.value !== this.state.text) {
       this.setState({ text: props.value, dirty: !!props.value });
       this._animate(!!props.value);
     }
@@ -107,7 +120,10 @@ var FloatingLabel = createReactClass({
 
   _renderLabel() {
     return (
-      <Animated.Text ref="label" style={[this.state.labelStyle, styles.label, this.props.labelStyle]}>
+      <Animated.Text
+        ref="label"
+        style={[this.state.labelStyle, styles.label, this.props.labelStyle]}
+      >
         {this.props.children}
       </Animated.Text>
     );
@@ -158,7 +174,11 @@ var FloatingLabel = createReactClass({
     return (
       <View style={elementStyles}>
         {this._renderLabel()}
-        <TextInput {...props} />
+        {props.refName ? (
+          <TextInput {...props} ref={props.refName} />
+        ) : (
+          <TextInput {...props} />
+        )}
       </View>
     );
   }
@@ -167,25 +187,25 @@ var FloatingLabel = createReactClass({
 var labelStyleObj = {
   marginTop: 21,
   paddingLeft: 9,
-  color: '#AAA',
-  position: 'absolute'
+  color: "#AAA",
+  position: "absolute"
 };
 
-if (Platform.OS === 'web') {
-  labelStyleObj.pointerEvents = 'none';
+if (Platform.OS === "web") {
+  labelStyleObj.pointerEvents = "none";
 }
 
 var styles = StyleSheet.create({
   element: {
-    position: 'relative'
+    position: "relative"
   },
   input: {
     height: 40,
-    borderColor: 'gray',
-    backgroundColor: 'transparent',
-    justifyContent: 'center',
+    borderColor: "gray",
+    backgroundColor: "transparent",
+    justifyContent: "center",
     borderWidth: 1,
-    color: 'black',
+    color: "black",
     fontSize: 20,
     borderRadius: 4,
     paddingLeft: 10,
