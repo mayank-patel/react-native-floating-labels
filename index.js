@@ -41,7 +41,8 @@ var FloatingLabel = createReactClass({
   getInitialState() {
     var state = {
       text: this.props.value,
-      dirty: this.props.value || this.props.placeholder
+      dirty: this.props.value || this.props.placeholder,
+      height: 0
     };
 
     this.cleanStyle = this.props.cleanStyle
@@ -173,16 +174,26 @@ var FloatingLabel = createReactClass({
       elementStyles.push(this.props.style);
     }
 
+    props.style.push({ height: Math.max(35, this.state.height) });
+
     return (
       <View style={elementStyles}>
         {this._renderLabel()}
         {this.props.inputRef ? (
           <TextInput
             {...props}
+            onContentSizeChange={event => {
+              this.setState({ height: event.nativeEvent.contentSize.height });
+            }}
             ref={input => this.props.inputRef && this.props.inputRef(input)}
           />
         ) : (
-          <TextInput {...props} />
+          <TextInput
+            {...props}
+            onContentSizeChange={event => {
+              this.setState({ height: event.nativeEvent.contentSize.height });
+            }}
+          />
         )}
       </View>
     );
