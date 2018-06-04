@@ -42,6 +42,7 @@ var FloatingLabel = createReactClass({
     var state = {
       text: this.props.value,
       dirty: this.props.value || this.props.placeholder,
+      focused: false,
       height: 0
     };
 
@@ -67,6 +68,8 @@ var FloatingLabel = createReactClass({
       this.setState({ text: props.value, dirty: !!props.value });
       if (shouldAnimate) {
         this._animate(true);
+      } else if (!this.state.focused) {
+        this._animate(false);
       }
     }
   },
@@ -90,7 +93,7 @@ var FloatingLabel = createReactClass({
 
   _onFocus() {
     this._animate(true);
-    this.setState({ dirty: true });
+    this.setState({ dirty: true, focused: true });
     if (this.props.onFocus) {
       this.props.onFocus(arguments);
     }
@@ -101,6 +104,8 @@ var FloatingLabel = createReactClass({
       this._animate(false);
       this.setState({ dirty: false });
     }
+
+    this.setState({ focused: false });
 
     if (this.props.onBlur) {
       this.props.onBlur(arguments);
