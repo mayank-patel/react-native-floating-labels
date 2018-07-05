@@ -42,7 +42,7 @@ var FloatingLabel = createReactClass({
   getInitialState() {
     var state = {
       text: this.props.value,
-      dirty: this.props.value || this.props.placeholder,
+      dirty: Boolean(this.props.value || this.props.placeholder),
       focused: false,
       height: 0
     };
@@ -61,15 +61,18 @@ var FloatingLabel = createReactClass({
 
   componentWillReceiveProps(props) {
     if (typeof props.value !== 'undefined' && props.value !== this.state.text) {
-      const shouldAnimate = !this.state.text;
-      this.setState({ text: props.value, dirty: !!props.value });
+      const shouldAnimate = !Boolean(this.state.text);
+      this.setState({ text: props.value, dirty: !!Boolean(props.value) });
       if (props.isSelectField) {
         this._animate(!!props.value);
       } else if (shouldAnimate) {
         this._animate(true);
-      } else if (!this.state.focused) {
+      } else if (!this.state.focused && !this.state.text) {
         this._animate(false);
       }
+    } else if (props.value === undefined) {
+      this.setState({ text: props.value, dirty: false, focused: false });
+      this._animate(false);
     }
   },
 
