@@ -156,7 +156,6 @@ var FloatingLabel = React.createClass({
                 onKeyPress: this.props.onKeyPress,
             	maxLength: this.props.maxLength,
                 keyboardAppearance: this.props.keyboardAppearance
-
             },
             elementStyles = [styles.element];
 
