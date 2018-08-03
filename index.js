@@ -1,7 +1,7 @@
-"use strict";
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import createReactClass from "create-react-class";
+'use strict';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import createReactClass from 'create-react-class';
 
 import {
   StyleSheet,
@@ -13,7 +13,7 @@ import {
   View,
   ViewPropTypes,
   Platform
-} from "react-native";
+} from 'react-native';
 
 var textPropTypes = Text.propTypes || ViewPropTypes;
 var textInputPropTypes = TextInput.propTypes || textPropTypes;
@@ -47,12 +47,8 @@ var FloatingLabel = createReactClass({
       height: 0
     };
 
-    this.cleanStyle = this.props.cleanStyle
-      ? this.props.cleanStyle
-      : cleanStyle;
-    this.dirtyStyle = this.props.dirtyStyle
-      ? this.props.dirtyStyle
-      : dirtyStyle;
+    this.cleanStyle = this.props.cleanStyle ? this.props.cleanStyle : cleanStyle;
+    this.dirtyStyle = this.props.dirtyStyle ? this.props.dirtyStyle : dirtyStyle;
 
     var style = state.dirty ? this.dirtyStyle : this.cleanStyle;
     state.labelStyle = {
@@ -64,7 +60,7 @@ var FloatingLabel = createReactClass({
   },
 
   componentWillReceiveProps(props) {
-    if (typeof props.value !== "undefined" && props.value !== this.state.text) {
+    if (typeof props.value !== 'undefined' && props.value !== this.state.text) {
       const shouldAnimate = !Boolean(this.state.text);
       this.setState({ text: props.value, dirty: !!Boolean(props.value) });
       if (props.isSelectField) {
@@ -76,7 +72,7 @@ var FloatingLabel = createReactClass({
       }
     } else if (
       props.value === undefined &&
-      (props.keyboardType !== "numeric" || props.keyboardType !== "decimal-pad")
+      (props.keyboardType !== 'numeric' || props.keyboardType !== 'decimal-pad')
     ) {
       this.setState({ text: props.value, dirty: false, focused: false });
       this._animate(false);
@@ -139,10 +135,7 @@ var FloatingLabel = createReactClass({
 
   _renderLabel() {
     return (
-      <Animated.Text
-        ref="label"
-        style={[this.state.labelStyle, styles.label, this.props.labelStyle]}
-      >
+      <Animated.Text ref="label" style={[this.state.labelStyle, styles.label, this.props.labelStyle]}>
         {this.props.children}
       </Animated.Text>
     );
@@ -197,20 +190,41 @@ var FloatingLabel = createReactClass({
       <View style={elementStyles}>
         {this._renderLabel()}
         {this.props.inputRef ? (
+          this.props.editable ? (
+            <TextInput
+              {...props}
+              onContentSizeChange={event => {
+                this.setState({ height: event.nativeEvent.contentSize.height });
+              }}
+              ref={input => this.props.inputRef && this.props.inputRef(input)}
+            />
+          ) : (
+            <View pointerEvents="none">
+              <TextInput
+                {...props}
+                onContentSizeChange={event => {
+                  this.setState({ height: event.nativeEvent.contentSize.height });
+                }}
+                ref={input => this.props.inputRef && this.props.inputRef(input)}
+              />
+            </View>
+          )
+        ) : this.props.editable ? (
           <TextInput
             {...props}
             onContentSizeChange={event => {
               this.setState({ height: event.nativeEvent.contentSize.height });
             }}
-            ref={input => this.props.inputRef && this.props.inputRef(input)}
           />
         ) : (
-          <TextInput
-            {...props}
-            onContentSizeChange={event => {
-              this.setState({ height: event.nativeEvent.contentSize.height });
-            }}
-          />
+          <View pointerEvents="none">
+            <TextInput
+              {...props}
+              onContentSizeChange={event => {
+                this.setState({ height: event.nativeEvent.contentSize.height });
+              }}
+            />
+          </View>
         )}
       </View>
     );
@@ -220,25 +234,25 @@ var FloatingLabel = createReactClass({
 var labelStyleObj = {
   marginTop: 21,
   paddingLeft: 9,
-  color: "#AAA",
-  position: "absolute"
+  color: '#AAA',
+  position: 'absolute'
 };
 
-if (Platform.OS === "web") {
-  labelStyleObj.pointerEvents = "none";
+if (Platform.OS === 'web') {
+  labelStyleObj.pointerEvents = 'none';
 }
 
 var styles = StyleSheet.create({
   element: {
-    position: "relative"
+    position: 'relative'
   },
   input: {
     height: 40,
-    borderColor: "gray",
-    backgroundColor: "transparent",
-    justifyContent: "center",
+    borderColor: 'gray',
+    backgroundColor: 'transparent',
+    justifyContent: 'center',
     borderWidth: 1,
-    color: "black",
+    color: 'black',
     fontSize: 20,
     borderRadius: 4,
     paddingLeft: 10,
