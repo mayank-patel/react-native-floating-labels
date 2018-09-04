@@ -1,12 +1,13 @@
 {
   "name": "react-native-floating-labels",
-  "version": "1.1.8",
-  "description": "Reusabe floating lable component for react native",
+  "version": "2.0.0",
+  "description": "Reusable floating label component for react native",
   "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/mayank-patel/react-native-floating-labels"
   },
+  "private": true,
   "keywords": [
     "react-component",
     "react-native",
@@ -21,5 +22,9 @@
     "test": "echo 'Success'"
   },
   "author": "Mayank Patel",
+  "contributors": [
+    "Juan Carlos Miranda Carruana",
+    "Lee Burton"
+  ],
   "license": "MIT"
 }
