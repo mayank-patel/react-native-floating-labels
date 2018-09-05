@@ -1,4 +1,3 @@
-'use strict';
 import React, {Component} from 'react';
 
 import {
@@ -31,6 +30,16 @@ export default class FloatingLabel extends Component {
         };
     }
 
+    componentWillReceiveProps(props) {
+        if (typeof props.value !== 'undefined' && props.value !== this.state.text) {
+            this.setState({
+                text: props.value,
+                dirty: !!props.value
+            });
+            this._animate(!!props.value, props)
+        }
+    }
+
     _getStyle = (dirty, props) => {
         const dirtyStyle = {
             fontSize: 14,
@@ -44,16 +53,6 @@ export default class FloatingLabel extends Component {
         };
         return dirty ? dirtyStyle : cleanStyle;
     };
-
-    componentWillReceiveProps(props) {
-        if (typeof props.value !== 'undefined' && props.value !== this.state.text) {
-            this.setState({
-                text: props.value,
-                dirty: !!props.value
-            });
-            this._animate(!!props.value, props)
-        }
-    }
 
     _animate = (dirty, props) => {
         const nextStyle = this._getStyle(dirty, props);
@@ -77,22 +76,22 @@ export default class FloatingLabel extends Component {
         this.setState({dirty: true});
 
         if (this.props.onFocus) {
-            this.props.onFocus(arguments);
+            this.props.onFocus(...args);
         }
     };
 
-    _onBlur = () => {
+    _handleBlur = () => {
         if (!this.state.text) {
             this._animate(false, this.props);
             this.setState({dirty: false});
         }
 
         if (this.props.onBlur) {
-            this.props.onBlur(arguments);
+            this.props.onBlur(...args);
         }
     };
 
-    onChangeText = (text) => {
+    _handleChangeText = (text) => {
         this.setState({text});
 
         if (this.props.onChangeText) {
@@ -100,7 +99,7 @@ export default class FloatingLabel extends Component {
         }
     };
 
-    updateText = (event) => {
+    _handleEndEditing = (event) => {
         const text = event.nativeEvent.text;
         this.setState({text});
 
@@ -115,52 +114,24 @@ export default class FloatingLabel extends Component {
                 ref='label'
                 style={[this.state.labelStyle, styles.label, this.props.labelStyle]}
             >
-                {this.props.children}
+                {this.props.label}
             </Animated.Text>
         )
     };
 
     render() {
         const props = {
-            autoCapitalize: this.props.autoCapitalize,
-            autoCorrect: this.props.autoCorrect,
-            autoFocus: this.props.autoFocus,
-            bufferDelay: this.props.bufferDelay,
-            clearButtonMode: this.props.clearButtonMode,
-            clearTextOnFocus: this.props.clearTextOnFocus,
-            controlled: this.props.controlled,
-            editable: this.props.editable,
-            enablesReturnKeyAutomatically: this.props.enablesReturnKeyAutomatically,
-            keyboardType: this.props.keyboardType,
-            multiline: this.props.multiline,
-            numberOfLines: this.props.numberOfLines,
-            onBlur: this._onBlur,
-            onChange: this.props.onChange,
-            onChangeText: this.onChangeText,
-            onEndEditing: this.updateText,
+            ...this.props,
+            onBlur: this._handleBlur,
+            onChangeText: this._handleChangeText,
+            onEndEditing: this._handleEndEditing,
             onFocus: this._onFocus,
-            onSubmitEditing: this.props.onSubmitEditing,
-            password: this.props.secureTextEntry || this.props.password, // Compatibility
-            placeholder: this.props.placeholder,
-            secureTextEntry: this.props.secureTextEntry || this.props.password, // Compatibility
-            returnKeyType: this.props.returnKeyType,
-            selectTextOnFocus: this.props.selectTextOnFocus,
-            selectionState: this.props.selectionState,
-            style: [styles.input],
-            testID: this.props.testID,
-            value: this.state.text,
-            underlineColorAndroid: this.props.underlineColorAndroid, // android TextInput will show the default bottom border
-            onKeyPress: this.props.onKeyPress
+            style: [
+                styles.input,
+                this.props.inputStyle
+            ]
         };
-        const elementStyles = [styles.element];
-
-        if (this.props.inputStyle) {
-            props.style.push(this.props.inputStyle);
-        }
-
-        if (this.props.style) {
-            elementStyles.push(this.props.style);
-        }
+        const elementStyles = [styles.element, this.props.style];
 
         return (
             <View style={elementStyles}>
