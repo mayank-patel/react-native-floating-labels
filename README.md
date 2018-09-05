@@ -1,5 +1,5 @@
-## react-native-floating-labels [![Build Status](https://travis-ci.org/mayank-patel/react-native-floating-labels.svg?branch=master)](https://travis-ci.org/mayank-patel/react-native-floating-labels) [![npm version](https://badge.fury.io/js/react-native-floating-labels.svg)](https://badge.fury.io/js/react-native-floating-labels) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE) [![Code Climate](https://codeclimate.com/github/mayank-patel/react-native-floating-labels/badges/gpa.svg)](https://codeclimate.com/github/mayank-patel/react-native-floating-labels)
- 
+## react-native-floating-labels
+
 A `<FloatingLabel>` component for react-native. This is still very much a work
 in progress and only handles the simplest of cases, ideas and
 contributions are very welcome.
@@ -129,8 +129,6 @@ Following events are supported:
 - onSubmitEditing
 
 ```
-
-
 
 
 **MIT Licensed**
