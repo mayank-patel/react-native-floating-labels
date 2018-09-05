@@ -43,7 +43,7 @@ var FloatingLabel = createReactClass({
     var state = {
       text: this.props.value,
       dirty: Boolean(this.props.value || this.props.placeholder),
-      focused: false,
+      focused: Boolean(this.props.autoFocus),
       height: 0
     };
 
@@ -60,22 +60,31 @@ var FloatingLabel = createReactClass({
   },
 
   componentWillReceiveProps(props) {
-    if (typeof props.value !== 'undefined' && props.value !== this.state.text) {
-      const shouldAnimate = !Boolean(this.state.text);
+    // if (typeof props.value !== 'undefined' && props.value !== this.state.text) {
+    //   const shouldAnimate = !Boolean(this.state.text);
+    //   this.setState({ text: props.value, dirty: !!Boolean(props.value) });
+    //   if (props.isSelectField) {
+    //     this._animate(!!props.value);
+    //   } else if (shouldAnimate) {
+    //     this._animate(true);
+    //   } else if (!this.state.focused && !this.state.text) {
+    //     this._animate(false);
+    //   }
+    // } else if (
+    //   props.value === undefined &&
+    //   (props.keyboardType !== 'numeric' || props.keyboardType !== 'decimal-pad')
+    // ) {
+    //   this.setState({ text: props.value, dirty: false, focused: false });
+    //   this._animate(false);
+    // }
+    if (props.value !== undefined && props.value !== this.state.text) {
+      const shouldAnimate = Boolean(props.value);
       this.setState({ text: props.value, dirty: !!Boolean(props.value) });
       if (props.isSelectField) {
         this._animate(!!props.value);
-      } else if (shouldAnimate) {
-        this._animate(true);
-      } else if (!this.state.focused && !this.state.text) {
-        this._animate(false);
+      } else {
+        this._animate(shouldAnimate || this.state.focused);
       }
-    } else if (
-      props.value === undefined &&
-      (props.keyboardType !== 'numeric' || props.keyboardType !== 'decimal-pad')
-    ) {
-      this.setState({ text: props.value, dirty: false, focused: false });
-      this._animate(false);
     }
   },
 
