@@ -85,6 +85,9 @@ var FloatingLabel = createReactClass({
       } else {
         this._animate(shouldAnimate || this.state.focused);
       }
+    } else if (props.value === undefined && this.state.text !== '') {
+      this.setState({ text: props.value, dirty: false });
+      this._animate(false);
     }
   },
 
