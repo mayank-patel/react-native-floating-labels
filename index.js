@@ -139,6 +139,7 @@ var FloatingLabel  = createReactClass({
         returnKeyType: this.props.returnKeyType,
         selectTextOnFocus: this.props.selectTextOnFocus,
         selectionState: this.props.selectionState,
+        selectionColor: this.props.selectionColor,
         style: [styles.input],
         testID: this.props.testID,
         value: this.state.text,
