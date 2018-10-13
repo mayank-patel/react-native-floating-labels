@@ -124,7 +124,7 @@ var FloatingLabel  = createReactClass({
             onFocus: this._onFocus,
             style: [styles.input],
             value: this.state.text,
-            ref: inputRef
+            ref: this.props.inputRef || (_ => {})
         }),
         elementStyles = [styles.element];
 
