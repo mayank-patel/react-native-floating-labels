@@ -15,7 +15,7 @@
     "android"
   ],
   "dependencies": {
-    "lodash": "^3.8.0"
+    "lodash": "^4.17.5"
   },
   "scripts": {
     "test": "echo 'Success'"
