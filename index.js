@@ -12,6 +12,7 @@ var propTypes = {
   labelStyle: textPropTypes.style,
   disabled: PropTypes.bool,
   isSelectField: PropTypes.bool,
+  isPercentage: PropTypes.bool,
   currency: PropTypes,
   style: ViewPropTypes.style
 };
@@ -159,6 +160,10 @@ var FloatingLabel = createReactClass({
     return <Text style={{ position: 'absolute', bottom: 8, left: 8, fontSize: 17 }}>{this.props.currency.symbol}</Text>;
   },
 
+  _renderPercentage() {
+    return <Text style={{ position: 'absolute', bottom: 8, left: 8, fontSize: 17 }}>%</Text>;
+  },
+
   render() {
     var props = {
         autoCapitalize: this.props.autoCapitalize,
@@ -205,10 +210,12 @@ var FloatingLabel = createReactClass({
     props.style.push({ height: Math.max(35, this.state.height) });
 
     const isCurrency = this.props.currency && Boolean(this.props.value);
+    const isPercentage = this.props.isPercentage && Boolean(this.props.value);
 
     return (
       <View style={elementStyles}>
         {isCurrency && this._renderCurrency()}
+        {isPercentage && this._renderPercentage()}
         {this._renderLabel()}
         {this.props.inputRef ? (
           this.props.editable ? (
@@ -221,13 +228,13 @@ var FloatingLabel = createReactClass({
             />
           ) : (
             <View pointerEvents="none">
-                <TextInput
-                  {...props}
-                  onContentSizeChange={event => {
-                    this.setState({ height: event.nativeEvent.contentSize.height });
-                  }}
-                  ref={input => this.props.inputRef && this.props.inputRef(input)}
-                />
+              <TextInput
+                {...props}
+                onContentSizeChange={event => {
+                  this.setState({ height: event.nativeEvent.contentSize.height });
+                }}
+                ref={input => this.props.inputRef && this.props.inputRef(input)}
+              />
             </View>
           )
         ) : this.props.editable ? (
