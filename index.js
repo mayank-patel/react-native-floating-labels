@@ -1,19 +1,8 @@
 'use strict';
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import createReactClass from 'create-react-class';
-
-import {
-  StyleSheet,
-  TextInput,
-  LayoutAnimation,
-  Animated,
-  Easing,
-  Text,
-  View,
-  ViewPropTypes,
-  Platform
-} from 'react-native';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Animated, Easing, Platform, StyleSheet, Text, TextInput, View, ViewPropTypes } from 'react-native';
 
 var textPropTypes = Text.propTypes || ViewPropTypes;
 var textInputPropTypes = TextInput.propTypes || textPropTypes;
@@ -23,6 +12,7 @@ var propTypes = {
   labelStyle: textPropTypes.style,
   disabled: PropTypes.bool,
   isSelectField: PropTypes.bool,
+  currency: PropTypes,
   style: ViewPropTypes.style
 };
 
@@ -153,6 +143,22 @@ var FloatingLabel = createReactClass({
     );
   },
 
+  _renderTextInputWithRef() {
+    return (
+      <TextInput
+        {...props}
+        onContentSizeChange={event => {
+          this.setState({ height: event.nativeEvent.contentSize.height });
+        }}
+        ref={input => this.props.inputRef && this.props.inputRef(input)}
+      />
+    );
+  },
+
+  _renderCurrency() {
+    return <Text style={{ position: 'absolute', bottom: 8, left: 8, fontSize: 17 }}>{this.props.currency.symbol}</Text>;
+  },
+
   render() {
     var props = {
         autoCapitalize: this.props.autoCapitalize,
@@ -198,8 +204,11 @@ var FloatingLabel = createReactClass({
 
     props.style.push({ height: Math.max(35, this.state.height) });
 
+    const isCurrency = this.props.currency && Boolean(this.props.value);
+
     return (
       <View style={elementStyles}>
+        {isCurrency && this._renderCurrency()}
         {this._renderLabel()}
         {this.props.inputRef ? (
           this.props.editable ? (
@@ -212,13 +221,13 @@ var FloatingLabel = createReactClass({
             />
           ) : (
             <View pointerEvents="none">
-              <TextInput
-                {...props}
-                onContentSizeChange={event => {
-                  this.setState({ height: event.nativeEvent.contentSize.height });
-                }}
-                ref={input => this.props.inputRef && this.props.inputRef(input)}
-              />
+                <TextInput
+                  {...props}
+                  onContentSizeChange={event => {
+                    this.setState({ height: event.nativeEvent.contentSize.height });
+                  }}
+                  ref={input => this.props.inputRef && this.props.inputRef(input)}
+                />
             </View>
           )
         ) : this.props.editable ? (
