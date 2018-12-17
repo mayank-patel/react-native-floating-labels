@@ -13,7 +13,7 @@ var propTypes = {
   disabled: PropTypes.bool,
   isSelectField: PropTypes.bool,
   isPercentage: PropTypes.bool,
-  currency: PropTypes,
+  currency: PropTypes.object,
   style: ViewPropTypes.style
 };
 
