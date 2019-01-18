@@ -142,6 +142,7 @@ var FloatingLabel  = createReactClass({
         selectionColor: this.props.selectionColor,
         style: [styles.input],
         testID: this.props.testID,
+        accessibilityLabel: this.props.accessibilityLabel,
         value: this.state.text,
         underlineColorAndroid: this.props.underlineColorAndroid, // android TextInput will show the default bottom border
         onKeyPress: this.props.onKeyPress
