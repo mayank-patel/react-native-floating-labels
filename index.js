@@ -1,17 +1,8 @@
-"use strict";
-import createReactClass from "create-react-class";
-import PropTypes from "prop-types";
-import React from "react";
-import {
-  Animated,
-  Easing,
-  Platform,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  ViewPropTypes
-} from "react-native";
+'use strict';
+import createReactClass from 'create-react-class';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Animated, Easing, Platform, StyleSheet, Text, TextInput, View, ViewPropTypes } from 'react-native';
 
 var textPropTypes = Text.propTypes || ViewPropTypes;
 var textInputPropTypes = TextInput.propTypes || textPropTypes;
@@ -47,12 +38,8 @@ var FloatingLabel = createReactClass({
       height: 0
     };
 
-    this.cleanStyle = this.props.cleanStyle
-      ? this.props.cleanStyle
-      : cleanStyle;
-    this.dirtyStyle = this.props.dirtyStyle
-      ? this.props.dirtyStyle
-      : dirtyStyle;
+    this.cleanStyle = this.props.cleanStyle ? this.props.cleanStyle : cleanStyle;
+    this.dirtyStyle = this.props.dirtyStyle ? this.props.dirtyStyle : dirtyStyle;
 
     var style = state.dirty ? this.dirtyStyle : this.cleanStyle;
     state.labelStyle = {
@@ -89,7 +76,7 @@ var FloatingLabel = createReactClass({
       } else {
         this._animate(shouldAnimate || this.state.focused);
       }
-    } else if (props.value === undefined && this.state.text !== "") {
+    } else if (props.value === undefined && this.state.text !== '') {
       this.setState({ text: props.value, dirty: false });
       this._animate(false);
     }
@@ -151,10 +138,7 @@ var FloatingLabel = createReactClass({
 
   _renderLabel() {
     return (
-      <Animated.Text
-        ref="label"
-        style={[this.state.labelStyle, styles.label, this.props.labelStyle]}
-      >
+      <Animated.Text ref="label" style={[this.state.labelStyle, styles.label, this.props.labelStyle]}>
         {this.props.children}
       </Animated.Text>
     );
@@ -173,29 +157,11 @@ var FloatingLabel = createReactClass({
   },
 
   _renderCurrency() {
-    return (
-      <Text
-        style={[
-          { position: "absolute", bottom: 8, left: 8, fontSize: 17 },
-          this.props.currencyStyle
-        ]}
-      >
-        {this.props.currency.symbol}
-      </Text>
-    );
+    return <Text style={[{ position: 'absolute', bottom: 8, left: 8, fontSize: 17 }, this.props.currencyStyle]}>{this.props.currency.symbol}</Text>;
   },
 
   _renderPercentage() {
-    return (
-      <Text
-        style={[
-          { position: "absolute", bottom: 8, left: 8, fontSize: 17 },
-          this.props.percentageStyle
-        ]}
-      >
-        %
-      </Text>
-    );
+    return <Text style={[{ position: 'absolute', bottom: 8, left: 8, fontSize: 17 }, this.props.percentageStyle]}>%</Text>;
   },
 
   render() {
@@ -265,9 +231,7 @@ var FloatingLabel = createReactClass({
               <TextInput
                 {...props}
                 onContentSizeChange={event => {
-                  this.setState({
-                    height: event.nativeEvent.contentSize.height
-                  });
+                  this.setState({ height: event.nativeEvent.contentSize.height });
                 }}
                 ref={input => this.props.inputRef && this.props.inputRef(input)}
               />
@@ -298,25 +262,25 @@ var FloatingLabel = createReactClass({
 var labelStyleObj = {
   marginTop: 21,
   paddingLeft: 9,
-  color: "#AAA",
-  position: "absolute"
+  color: '#AAA',
+  position: 'absolute'
 };
 
-if (Platform.OS === "web") {
-  labelStyleObj.pointerEvents = "none";
+if (Platform.OS === 'web') {
+  labelStyleObj.pointerEvents = 'none';
 }
 
 var styles = StyleSheet.create({
   element: {
-    position: "relative"
+    position: 'relative'
   },
   input: {
     height: 40,
-    borderColor: "gray",
-    backgroundColor: "transparent",
-    justifyContent: "center",
+    borderColor: 'gray',
+    backgroundColor: 'transparent',
+    justifyContent: 'center',
     borderWidth: 1,
-    color: "black",
+    color: 'black',
     fontSize: 20,
     borderRadius: 4,
     paddingLeft: 10,
