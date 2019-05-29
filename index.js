@@ -157,11 +157,11 @@ var FloatingLabel = createReactClass({
   },
 
   _renderCurrency() {
-    return <Text style={{ position: 'absolute', bottom: 8, left: 8, fontSize: 17 }}>{this.props.currency.symbol}</Text>;
+    return <Text style={[{ position: 'absolute', bottom: 8, left: 8, fontSize: 17 }, this.props.currencyStyle]}>{this.props.currency.symbol}</Text>;
   },
 
   _renderPercentage() {
-    return <Text style={{ position: 'absolute', bottom: 8, left: 8, fontSize: 17 }}>%</Text>;
+    return <Text style={[{ position: 'absolute', bottom: 8, left: 8, fontSize: 17 }, this.props.percentageStyle]}>%</Text>;
   },
 
   render() {
