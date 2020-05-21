@@ -121,6 +121,7 @@ var FloatingLabel = createReactClass({
       clearButtonMode: this.props.clearButtonMode,
       clearTextOnFocus: this.props.clearTextOnFocus,
       controlled: this.props.controlled,
+      defaultValue: this.state.text,
       editable: this.props.editable,
       enablesReturnKeyAutomatically: this.props.enablesReturnKeyAutomatically,
       keyboardType: this.props.keyboardType,
