@@ -209,3 +209,130 @@ describe('FloatingLabel — props & controlled value', () => {
     timingSpy.mockRestore();
   });
 });
+
+describe('FloatingLabel — accessibility: accessibilityLabel', () => {
+  it('derives accessibilityLabel from string children when not explicitly provided', () => {
+    render(<FloatingLabel>Email</FloatingLabel>);
+    expect(screen.UNSAFE_getByType(TextInput).props.accessibilityLabel).toBe('Email');
+  });
+
+  it('uses explicit accessibilityLabel over derived value', () => {
+    render(<FloatingLabel accessibilityLabel="Your email address">Email</FloatingLabel>);
+    expect(screen.UNSAFE_getByType(TextInput).props.accessibilityLabel).toBe('Your email address');
+  });
+
+  it('does not derive accessibilityLabel from non-string children', () => {
+    render(
+      <FloatingLabel>
+        <>{/* jsx child */}</>
+      </FloatingLabel>,
+    );
+    expect(screen.UNSAFE_getByType(TextInput).props.accessibilityLabel).toBeUndefined();
+  });
+});
+
+describe('FloatingLabel — accessibility: disabled accessibilityState', () => {
+  it('sets accessibilityState.disabled=true when disabled={true}', () => {
+    render(<FloatingLabel disabled>Email</FloatingLabel>);
+    expect(screen.UNSAFE_getByType(TextInput).props.accessibilityState).toMatchObject({
+      disabled: true,
+    });
+  });
+
+  it('sets accessibilityState.disabled=false when disabled={false}', () => {
+    render(<FloatingLabel disabled={false}>Email</FloatingLabel>);
+    expect(screen.UNSAFE_getByType(TextInput).props.accessibilityState).toMatchObject({
+      disabled: false,
+    });
+  });
+
+  it('merges consumer accessibilityState with auto-set disabled', () => {
+    render(
+      <FloatingLabel disabled accessibilityState={{selected: true}}>
+        Email
+      </FloatingLabel>,
+    );
+    expect(screen.UNSAFE_getByType(TextInput).props.accessibilityState).toMatchObject({
+      disabled: true,
+      selected: true,
+    });
+  });
+
+  it('consumer accessibilityState.disabled overrides auto-set value', () => {
+    render(
+      <FloatingLabel disabled accessibilityState={{disabled: false}}>
+        Email
+      </FloatingLabel>,
+    );
+    expect(screen.UNSAFE_getByType(TextInput).props.accessibilityState).toMatchObject({
+      disabled: false,
+    });
+  });
+
+  it('does not set accessibilityState when disabled is not provided', () => {
+    render(<FloatingLabel>Email</FloatingLabel>);
+    expect(screen.UNSAFE_getByType(TextInput).props.accessibilityState).toBeUndefined();
+  });
+});
+
+describe('FloatingLabel — accessibility: password field defaults', () => {
+  it('sets textContentType and autoComplete to "password" when secureTextEntry={true}', () => {
+    render(<FloatingLabel secureTextEntry>Password</FloatingLabel>);
+    const input = screen.UNSAFE_getByType(TextInput);
+    expect(input.props.textContentType).toBe('password');
+    expect(input.props.autoComplete).toBe('password');
+  });
+
+  it('explicit textContentType overrides the default', () => {
+    render(
+      <FloatingLabel secureTextEntry textContentType="newPassword">
+        Password
+      </FloatingLabel>,
+    );
+    expect(screen.UNSAFE_getByType(TextInput).props.textContentType).toBe('newPassword');
+  });
+
+  it('explicit autoComplete overrides the default', () => {
+    render(
+      <FloatingLabel secureTextEntry autoComplete="new-password">
+        Password
+      </FloatingLabel>,
+    );
+    expect(screen.UNSAFE_getByType(TextInput).props.autoComplete).toBe('new-password');
+  });
+
+  it('does not inject textContentType or autoComplete without secureTextEntry', () => {
+    render(<FloatingLabel>Email</FloatingLabel>);
+    const input = screen.UNSAFE_getByType(TextInput);
+    expect(input.props.textContentType).toBeUndefined();
+    expect(input.props.autoComplete).toBeUndefined();
+  });
+});
+
+describe('FloatingLabel — accessibility: errorMessage and helperText', () => {
+  it('renders errorMessage text when provided', () => {
+    render(<FloatingLabel errorMessage="Email is required">Email</FloatingLabel>);
+    expect(screen.getByText('Email is required')).toBeTruthy();
+  });
+
+  it('error text node has accessibilityLiveRegion="polite"', () => {
+    render(<FloatingLabel errorMessage="Email is required">Email</FloatingLabel>);
+    expect(screen.getByText('Email is required').props.accessibilityLiveRegion).toBe('polite');
+  });
+
+  it('renders helperText when provided', () => {
+    render(<FloatingLabel helperText="Enter your work email">Email</FloatingLabel>);
+    expect(screen.getByText('Enter your work email')).toBeTruthy();
+  });
+
+  it('helper text node has accessibilityLiveRegion="polite"', () => {
+    render(<FloatingLabel helperText="Enter your work email">Email</FloatingLabel>);
+    expect(screen.getByText('Enter your work email').props.accessibilityLiveRegion).toBe('polite');
+  });
+
+  it('renders no extra text nodes when neither errorMessage nor helperText is provided', () => {
+    render(<FloatingLabel>Email</FloatingLabel>);
+    // Only the label text 'Email' should be present
+    expect(screen.getAllByText('Email')).toHaveLength(1);
+  });
+});

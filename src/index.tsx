@@ -3,6 +3,7 @@ import {
   Animated,
   Platform,
   StyleSheet,
+  Text,
   TextInput,
   TextInputProps,
   TextStyle,
@@ -22,6 +23,10 @@ export interface FloatingLabelHandle {
 export interface FloatingLabelProps extends Omit<TextInputProps, 'style'> {
   children?: React.ReactNode;
   disabled?: boolean;
+  /** Error message rendered below the input and announced by screen readers. */
+  errorMessage?: string;
+  /** Helper text rendered below the input and announced by screen readers. */
+  helperText?: string;
   inputStyle?: TextInputProps['style'];
   labelStyle?: TextStyle;
   /** @deprecated Use the standard ref prop instead */
@@ -35,8 +40,13 @@ export interface FloatingLabelProps extends Omit<TextInputProps, 'style'> {
 const FloatingLabel = React.forwardRef<FloatingLabelHandle, FloatingLabelProps>(
   (
     {
+      accessibilityLabel,
+      accessibilityState,
+      autoComplete,
       children,
       disabled,
+      errorMessage,
+      helperText,
       inputStyle,
       labelStyle,
       myRef,
@@ -48,6 +58,7 @@ const FloatingLabel = React.forwardRef<FloatingLabelHandle, FloatingLabelProps>(
       placeholder,
       secureTextEntry,
       style,
+      textContentType,
       value,
       ...restInputProps
     },
@@ -61,6 +72,20 @@ const FloatingLabel = React.forwardRef<FloatingLabelHandle, FloatingLabelProps>(
     });
     const isFirstRender = useRef(true);
     const inputRef = useRef<TextInput>(null);
+
+    // Phase 1: derive accessibilityLabel from children when not explicitly provided
+    const derivedAccessibilityLabel =
+      accessibilityLabel ?? (typeof children === 'string' ? children : undefined);
+
+    // Phase 1: merge disabled into accessibilityState
+    const derivedAccessibilityState =
+      disabled !== undefined ? {disabled, ...accessibilityState} : accessibilityState;
+
+    // Phase 2: default textContentType and autoComplete for password fields
+    const derivedTextContentType =
+      textContentType ?? (secureTextEntry || password ? 'password' : undefined);
+    const derivedAutoComplete =
+      autoComplete ?? (secureTextEntry || password ? 'password' : undefined);
 
     const animate = useCallback((isDirty: boolean) => {
       const target = isDirty ? dirtyStyle : cleanStyle;
@@ -157,6 +182,9 @@ const FloatingLabel = React.forwardRef<FloatingLabelHandle, FloatingLabelProps>(
           {...restInputProps}
           ref={mergedRef}
           style={[styles.input, inputStyle]}
+          accessibilityLabel={derivedAccessibilityLabel}
+          accessibilityState={derivedAccessibilityState}
+          autoComplete={derivedAutoComplete}
           editable={!disabled}
           onBlur={handleBlur}
           onChangeText={handleChangeText}
@@ -164,9 +192,20 @@ const FloatingLabel = React.forwardRef<FloatingLabelHandle, FloatingLabelProps>(
           onFocus={handleFocus}
           placeholder={placeholder}
           secureTextEntry={secureTextEntry || password}
+          textContentType={derivedTextContentType}
           underlineColorAndroid="transparent"
           value={text}
         />
+        {errorMessage ? (
+          <Text accessibilityLiveRegion="polite" style={styles.errorText}>
+            {errorMessage}
+          </Text>
+        ) : null}
+        {helperText ? (
+          <Text accessibilityLiveRegion="polite" style={styles.helperText}>
+            {helperText}
+          </Text>
+        ) : null}
       </View>
     );
   },
@@ -194,6 +233,18 @@ const styles = StyleSheet.create({
     color: '#AAA',
     position: 'absolute',
   } as TextStyle,
+  errorText: {
+    fontSize: 12,
+    color: '#cc0000',
+    marginTop: 4,
+    paddingLeft: 2,
+  },
+  helperText: {
+    fontSize: 12,
+    color: '#666666',
+    marginTop: 4,
+    paddingLeft: 2,
+  },
 });
 
 FloatingLabel.displayName = 'FloatingLabel';
