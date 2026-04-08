@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/mayank-patel/react-native-floating-labels/compare/v2.1.0...v2.1.1) (2026-04-08)
+
+
+### Bug Fixes
+
+* **demo:** alias react/react-dom to demo node_modules for Rolldown compat ([ab9d53c](https://github.com/mayank-patel/react-native-floating-labels/commit/ab9d53cf45d27513ca927162349b32eb93ef62ae))
+
 # [2.1.0](https://github.com/mayank-patel/react-native-floating-labels/compare/v2.0.0...v2.1.0) (2026-04-08)
 
 
