@@ -1,136 +1,101 @@
-## react-native-floating-labels [![Build Status](https://travis-ci.org/mayank-patel/react-native-floating-labels.svg?branch=master)](https://travis-ci.org/mayank-patel/react-native-floating-labels) [![npm version](https://badge.fury.io/js/react-native-floating-labels.svg)](https://badge.fury.io/js/react-native-floating-labels) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE) [![Code Climate](https://codeclimate.com/github/mayank-patel/react-native-floating-labels/badges/gpa.svg)](https://codeclimate.com/github/mayank-patel/react-native-floating-labels)
- 
-A `<FloatingLabel>` component for react-native. This is still very much a work
-in progress and only handles the simplest of cases, ideas and
-contributions are very welcome.
+## react-native-floating-labels
+
+[![CI](https://github.com/mayank-patel/react-native-floating-labels/actions/workflows/ci.yml/badge.svg)](https://github.com/mayank-patel/react-native-floating-labels/actions/workflows/ci.yml)
+[![npm version](https://badge.fury.io/js/react-native-floating-labels.svg)](https://badge.fury.io/js/react-native-floating-labels)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+
+An animated floating label `<TextInput>` component for React Native (iOS, Android, and web via react-native-web).
+
+**[Live demo →](https://react-native-floating-labels.js.org)**
 
 ![Demo](https://raw.githubusercontent.com/mayank-patel/react-native-floating-labels/master/demo.gif)
 
-## Add it to your project
+---
 
+## Installation
 
-1. Run `npm install react-native-floating-labels --save`
-2. `var FloatingLabel = require('react-native-floating-labels');`
+```bash
+npm install react-native-floating-labels
+```
+
+---
 
 ## Usage
 
-```javascript
-'use strict';
+```tsx
+import FloatingLabel from 'react-native-floating-labels';
 
-var React = require('react-native');
-
-var FloatingLabel = require('react-native-floating-labels');
-
-var {
-  AppRegistry,
-  StyleSheet,
-  View,
-} = React;
-
-class form extends React.Component {
-
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      dirty: false,
-    };
-  }
-
-  onBlur() {
-    console.log('#####: onBlur');
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <FloatingLabel 
-            labelStyle={styles.labelInput}
-            inputStyle={styles.input}
-            style={styles.formInput}
-            value='john@email.com'
-            onBlur={this.onBlur}
-          >Email</FloatingLabel>
-        <FloatingLabel 
-            labelStyle={styles.labelInput}
-            inputStyle={styles.input}
-
-            style={styles.formInput}
-          >First Name</FloatingLabel>
-        <FloatingLabel
-            labelStyle={styles.labelInput}
-            inputStyle={styles.input}
-            style={styles.formInput}
-          >Last Name</FloatingLabel>
-      </View>
-    );
-  }
-};
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 65,
-    backgroundColor: 'white',
-  },
-  labelInput: {
-    color: '#673AB7',
-  },
-  formInput: {    
-    borderBottomWidth: 1.5, 
-    marginLeft: 20,
-    borderColor: '#333',       
-  },
-  input: {
-    borderWidth: 0
-  }
-});
-
-AppRegistry.registerComponent('form', () => form);
-
-
-
-
+<FloatingLabel>Email</FloatingLabel>;
 ```
 
-Additional Props: 
+### With custom styles
 
-FloatingLabel is just like any TextInput. It supports the below mentioned events handlers:
-
-```
-Following properties of TextInput are supported:
-
-- autoCapitalize
-- autoCorrect
-- autoFocus
-- bufferDelay
-- clearButtonMode
-- clearTextOnFocus
-- controlled
-- editable
-- enablesReturnKeyAutomatically
-- keyboardType
-- multiline
-- password
-- returnKeyType
-- selectTextOnFocus
-- selectionState
-- style
-- testID
-- value
-
-Following events are supported:
-
-- onBlur
-- onChange
-- onChangeText
-- onEndEditing
-- onFocus
-- onSubmitEditing
-
+```tsx
+<FloatingLabel
+  labelStyle={{color: '#6200ea'}}
+  inputStyle={{borderColor: '#6200ea', borderWidth: 2, borderRadius: 8}}
+  style={{marginBottom: 16}}
+>
+  Email address
+</FloatingLabel>
 ```
 
+### Controlled value
 
+```tsx
+const [email, setEmail] = React.useState('');
 
+<FloatingLabel value={email} onChangeText={setEmail}>
+  Email address
+</FloatingLabel>;
+```
+
+### Imperative ref controls
+
+```tsx
+import FloatingLabel, {FloatingLabelHandle} from 'react-native-floating-labels';
+
+const ref = React.useRef<FloatingLabelHandle>(null);
+
+<FloatingLabel ref={ref}>First Name</FloatingLabel>;
+
+ref.current?.focus();
+ref.current?.blur();
+ref.current?.clear();
+```
+
+---
+
+## Props
+
+`FloatingLabel` accepts all standard [`TextInput`](https://reactnative.dev/docs/textinput) props plus the following:
+
+| Prop              | Type                      | Default | Description                                                  |
+| ----------------- | ------------------------- | ------- | ------------------------------------------------------------ |
+| `children`        | `ReactNode`               | —       | The floating label text                                      |
+| `style`           | `ViewStyle`               | —       | Style for the outer container `View`                         |
+| `inputStyle`      | `TextInputProps['style']` | —       | Style applied to the inner `TextInput`                       |
+| `labelStyle`      | `TextStyle`               | —       | Style applied to the animated label                          |
+| `disabled`        | `boolean`                 | `false` | Disables the input (`editable={false}`)                      |
+| `value`           | `string`                  | —       | Controlled value; animates the label when changed externally |
+| `secureTextEntry` | `boolean`                 | `false` | Hides input text (password field)                            |
+| `password`        | `boolean`                 | —       | **Deprecated** — use `secureTextEntry` instead               |
+| `myRef`           | `React.Ref<TextInput>`    | —       | **Deprecated** — use the standard `ref` prop instead         |
+
+### `FloatingLabelHandle` (ref)
+
+| Method    | Description                                                               |
+| --------- | ------------------------------------------------------------------------- |
+| `focus()` | Focuses the input                                                         |
+| `blur()`  | Blurs the input                                                           |
+| `clear()` | Clears the input text and animates the label back to its resting position |
+
+---
+
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for the development workflow, Conventional Commits format, and release process.
+
+---
 
 **MIT Licensed**

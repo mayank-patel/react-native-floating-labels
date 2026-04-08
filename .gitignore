@@ -1,2 +1,6 @@
 node_modules
 .idea
+index.test.d.ts
+dist
+demo/dist
+demo/node_modules

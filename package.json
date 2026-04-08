@@ -1,8 +1,25 @@
 {
   "name": "react-native-floating-labels",
-  "version": "1.1.10",
+  "version": "2.0.0",
   "description": "Reusabe floating lable component for react native",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/mayank-patel/react-native-floating-labels"
@@ -14,11 +31,63 @@
     "ios",
     "android"
   ],
-  "dependencies": {
-
-  },
   "scripts": {
-    "test": "echo 'Success'"
+    "build": "tsup",
+    "prepublishOnly": "npm run build",
+    "demo": "npm run dev --prefix demo",
+    "lint": "eslint src __tests__",
+    "lint:fix": "eslint src __tests__ --fix",
+    "format": "prettier --write src __tests__",
+    "format:check": "prettier --check src __tests__",
+    "prepare": "husky",
+    "test": "jest",
+    "type-check": "tsc --noEmit"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{js,json,md}": [
+      "prettier --write"
+    ]
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.68.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.0",
+    "@babel/preset-env": "^7.24.0",
+    "@babel/preset-react": "^7.24.0",
+    "@babel/preset-typescript": "^7.24.0",
+    "@eslint/js": "^9.39.4",
+    "@react-native/babel-preset": "^0.85.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.6",
+    "@semantic-release/npm": "^12.0.2",
+    "@semantic-release/release-notes-generator": "^14.1.0",
+    "@testing-library/react-native": "^12.4.0",
+    "@types/jest": "^30.0.0",
+    "@types/react": "^19.1.1",
+    "babel-jest": "^29.7.0",
+    "eslint": "^9.39.4",
+    "eslint-config-prettier": "^9.1.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "husky": "^9.1.7",
+    "jest": "^29.7.0",
+    "lint-staged": "^15.5.2",
+    "prettier": "^3.8.1",
+    "react": "^19.2.3",
+    "react-native": "^0.84.1",
+    "react-test-renderer": "^19.2.0",
+    "semantic-release": "^24.2.9",
+    "tsup": "^8.5.1",
+    "typescript": "^5.4.0",
+    "typescript-eslint": "^8.58.1"
   },
   "author": "Mayank Patel",
   "license": "MIT"
