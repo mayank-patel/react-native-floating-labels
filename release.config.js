@@ -1,6 +1,6 @@
 /** @type {import('semantic-release').GlobalConfig} */
 module.exports = {
-  branches: ['master', {name: 'beta', prerelease: true, channel: 'beta'}],
+  branches: ['main', {name: 'beta', prerelease: true, channel: 'beta'}],
   plugins: [
     '@semantic-release/commit-analyzer',
     '@semantic-release/release-notes-generator',

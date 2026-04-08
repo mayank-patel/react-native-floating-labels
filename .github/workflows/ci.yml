@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [master, beta]
+    branches: [main, beta]
   pull_request:
-    branches: [master, beta]
+    branches: [main, beta]
 
 jobs:
   build-and-test:

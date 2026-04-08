@@ -8,7 +8,7 @@ An animated floating label `<TextInput>` component for React Native (iOS, Androi
 
 **[Live demo →](https://react-native-floating-labels.js.org)**
 
-![Demo](https://raw.githubusercontent.com/mayank-patel/react-native-floating-labels/master/demo.gif)
+![Demo](https://raw.githubusercontent.com/mayank-patel/react-native-floating-labels/main/demo.gif)
 
 ---
 
@@ -89,6 +89,98 @@ ref.current?.clear();
 | `focus()` | Focuses the input                                                         |
 | `blur()`  | Blurs the input                                                           |
 | `clear()` | Clears the input text and animates the label back to its resting position |
+
+---
+
+## Testing locally with a React Native app
+
+The quickest way to test the library end-to-end against a real device or simulator before publishing.
+
+### 1. Create a test app
+
+**Expo (recommended — no Xcode/Android Studio required for quick tests):**
+
+```bash
+npx create-expo-app@latest FloatingLabelsTest
+cd FloatingLabelsTest
+```
+
+**Bare React Native:**
+
+```bash
+npx @react-native-community/cli init FloatingLabelsTest
+cd FloatingLabelsTest
+```
+
+### 2. Pack the library
+
+Run this from the library root. It produces a tarball (e.g. `react-native-floating-labels-2.0.0.tgz`) that mirrors exactly what gets published to npm:
+
+```bash
+npm run build
+npm pack
+```
+
+### 3. Install the tarball in the test app
+
+```bash
+npm install /path/to/react-native-floating-labels-2.0.0.tgz
+```
+
+For Expo, no additional linking is required. For bare React Native, run `npx pod-install` on iOS.
+
+### 4. Use it in the app
+
+Replace the contents of `App.tsx` (or `App.js`) with:
+
+```tsx
+import React, {useRef} from 'react';
+import {Button, SafeAreaView, StyleSheet} from 'react-native';
+import FloatingLabel, {FloatingLabelHandle} from 'react-native-floating-labels';
+
+export default function App() {
+  const ref = useRef<FloatingLabelHandle>(null);
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <FloatingLabel style={styles.field}>First Name</FloatingLabel>
+      <FloatingLabel style={styles.field} secureTextEntry>
+        Password
+      </FloatingLabel>
+      <FloatingLabel ref={ref} style={styles.field}>
+        Ref-controlled field
+      </FloatingLabel>
+      <Button title="Clear via ref" onPress={() => ref.current?.clear()} />
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {flex: 1, padding: 24, backgroundColor: '#fff'},
+  field: {marginBottom: 16},
+});
+```
+
+### 5. Start the app
+
+```bash
+# Expo
+npx expo start
+
+# Bare React Native — iOS
+npx react-native run-ios
+
+# Bare React Native — Android
+npx react-native run-android
+```
+
+### Testing the beta release from npm
+
+If you want to test the published beta instead of a local tarball:
+
+```bash
+npm install react-native-floating-labels@beta
+```
 
 ---
 
