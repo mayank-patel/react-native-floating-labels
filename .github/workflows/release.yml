@@ -3,7 +3,7 @@ name: Release
 on:
   workflow_run:
     workflows: [CI]
-    branches: [master]
+    branches: [main]
     types: [completed]
 
 jobs:
@@ -22,7 +22,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'npm'
       - run: npm ci
       - run: npm run build
