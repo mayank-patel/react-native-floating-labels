@@ -1,7 +1,7 @@
 ## react-native-floating-labels
 
 [![CI](https://github.com/mayank-patel/react-native-floating-labels/actions/workflows/ci.yml/badge.svg)](https://github.com/mayank-patel/react-native-floating-labels/actions/workflows/ci.yml)
-[![npm version](https://badge.fury.io/js/react-native-floating-labels.svg)](https://badge.fury.io/js/react-native-floating-labels)
+![NPM Version](https://img.shields.io/npm/v/react-native-floating-labels)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 An animated floating label `<TextInput>` component for React Native (iOS, Android, and web via react-native-web).
