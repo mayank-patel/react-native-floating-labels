@@ -1,3 +1,10 @@
+## [2.1.2](https://github.com/mayank-patel/react-native-floating-labels/compare/v2.1.1...v2.1.2) (2026-04-09)
+
+
+### Bug Fixes
+
+* Fix the npm version badge in readme.md ([6a3c274](https://github.com/mayank-patel/react-native-floating-labels/commit/6a3c27479eecd92a2196e5e97e691dc37272256c))
+
 ## [2.1.1](https://github.com/mayank-patel/react-native-floating-labels/compare/v2.1.0...v2.1.1) (2026-04-08)
 
 
